@@ -1,0 +1,225 @@
+[
+  {
+    "step": "Read Backend Dependencies (Spring Boot pom.xml)",
+    "sub_steps": [
+      "Locate and read /home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/pom.xml to list existing dependencies.",
+      "Verify presence of spring-boot-starter-data-jpa, spring-boot-starter-web, spring-boot-starter-validation, mysql-connector-java, lombok, and other required libraries.",
+      "Align all subsequent backend design to use only these dependencies."
+    ],
+    "files_to_add": [],
+    "files_to_edit": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/pom.xml"
+    ],
+    "description": "This step ensures all planned backend code uses only available dependencies and is compatible with the generated project."
+  },
+  {
+    "step": "Implement Spring Boot Entities and Relationships",
+    "sub_steps": [
+      "Create Flight, Hotel, and Booking entity classes, using jakarta.persistence annotations for table/entity mapping.",
+      "Define all fields given in requirements; use appropriate types (e.g., LocalDateTime for times, Integer for available seats/rooms).",
+      "Specify relationships (if any, such as join columns for Booking's flightId/hotelId referencing Flight/Hotel).",
+      "Add validation annotations where required (e.g., @NotNull, constraints on allowed values).",
+      "Add JPA indices if necessary for performance.",
+      "Add Lombok's @Data or equivalent for getter/setter convenience."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/model/Flight.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/model/Hotel.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/model/Booking.java"
+    ],
+    "files_to_edit": [],
+    "description": "Defines data storage structure and validation for the domain. Supports test: testFlightModelAndRepository, testHotelModelAndRepository, testFlightBookingService, testHotelBookingService, testCancelBookingService. Reference application.properties for DB config."
+  },
+  {
+    "step": "Create Repository Interfaces with Custom Queries",
+    "sub_steps": [
+      "Create interfaces for FlightRepository, HotelRepository, and BookingRepository extending JpaRepository, parameterized with appropriate entity and ID types.",
+      "Declare required custom finder/query methods using Spring Data JPA query convention.",
+      "Annotate with @Repository as needed.",
+      "Ensure all repository methods needed by test cases and main logic are present."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/repository/FlightRepository.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/repository/HotelRepository.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/repository/BookingRepository.java"
+    ],
+    "files_to_edit": [],
+    "description": "Enables data fetching and manipulation via JPA; supports all repository-related test cases."
+  },
+  {
+    "step": "Develop Service Layer with Domain Logic",
+    "sub_steps": [
+      "Implement FlightService, HotelService, and BookingService as @Service components.",
+      "Implement all required business logic methods (CRUD and search for flights and hotels, booking/cancellation and pricing for bookings).",
+      "Handle all validation and business rules, such as seat/room availability checks, reference generation, and status transitions.",
+      "Throw custom exceptions or return error responses for invalid actions (e.g., double cancellation, booking full flights/hotels).",
+      "Use transactional boundaries for operations that update seat/room counts to ensure consistency."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/service/FlightService.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/service/HotelService.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/service/BookingService.java"
+    ],
+    "files_to_edit": [],
+    "description": "Implements all business rules and supports service-level test cases. Provides business logic needed by controllers and test cases for booking and cancellation functionality."
+  },
+  {
+    "step": "Implement REST Controllers for API Endpoints",
+    "sub_steps": [
+      "Create FlightController, HotelController, and BookingController with @RestController and @RequestMapping annotations.",
+      "Expose all endpoints listed in requirements (GET/POST/PUT/DELETE for flights and hotels, and booking/cancellation for bookings).",
+      "Wire up request validation and error handling (return appropriate HTTP status codes, error bodies).",
+      "Use DTOs or directly use Jpa entities as request/response bodies as per suitability.",
+      "Enable CORS (allow all for development) for frontend integration."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/controller/FlightController.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/controller/HotelController.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/controller/BookingController.java"
+    ],
+    "files_to_edit": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/main/java/com/examly/springapp/TravelBookingPortalApplication.java"
+    ],
+    "description": "Establishes the REST API as required. Provides endpoints required by the frontend and test cases."
+  },
+  {
+    "step": "Implement ALL Backend Test Cases (JUnit)",
+    "sub_steps": [
+      "Create/modify test classes as per the test cases JSON:",
+      "- testFlightModelAndRepository: test model mapping and FlightRepository queries.",
+      "- testHotelModelAndRepository: test Hotel entity and HotelRepository queries.",
+      "- testFlightBookingService: test BookingService's flight booking logic, reference format, seat decrement, and failure on no availability.",
+      "- testHotelBookingService: similar for hotel booking, price calculation, and room decrement.",
+      "- testCancelBookingService: test cancellation logic, including status and seat/room increment, plus prevent double-cancellation.",
+      "Use @SpringBootTest or @DataJpaTest as appropriate.",
+      "Set up mocks for repository/service dependencies where needed.",
+      "Make assertions precisely as required by the test case descriptions.",
+      "Do NOT implement additional test scenarios beyond those provided."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/test/java/com/examly/springapp/model/FlightModelAndRepositoryTest.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/test/java/com/examly/springapp/model/HotelModelAndRepositoryTest.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/test/java/com/examly/springapp/service/FlightBookingServiceTest.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/test/java/com/examly/springapp/service/HotelBookingServiceTest.java",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/springapp/src/test/java/com/examly/springapp/service/CancelBookingServiceTest.java"
+    ],
+    "files_to_edit": [],
+    "description": "Ensures correctness and test-driven development of the backend logic. Each test must match its name/description from test case JSON. Test files reference their corresponding model/service/repository/controller classes for context."
+  },
+  {
+    "step": "Compile and Test Backend (Spring Boot)",
+    "sub_steps": [
+      "Run 'mvn clean compile -q -Dspring.main.banner-mode=off' in /springapp to verify code compiles.",
+      "Run 'mvn test -q -Dspring.main.banner-mode=off' to ensure all backend tests pass.",
+      "Run 'mvn clean install -q -Dspring.main.banner-mode=off' for a complete build check.",
+      "Fix errors if any during this phase before proceeding to frontend."
+    ],
+    "files_to_add": [],
+    "files_to_edit": [],
+    "description": "Validates Spring Boot code for correctness and test compliance before frontend development. Compilation required for test and application development."
+  },
+  {
+    "step": "Read Frontend Dependencies (React package.json)",
+    "sub_steps": [
+      "Read /home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/package.json for dependency list.",
+      "Verify dependencies for React, react-router-dom, CSS, and testing (Jest, React Testing Library).",
+      "Plan all frontend code to use these libraries only."
+    ],
+    "files_to_add": [],
+    "files_to_edit": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/package.json"
+    ],
+    "description": "Ensures frontend code is compatible with currently installed packages. Supports Jest/RTL test case integration."
+  },
+  {
+    "step": "Implement React Utility: ApiService and Constants",
+    "sub_steps": [
+      "Create src/utils/ApiService.js to provide required API functions for searching and booking flights/hotels and managing bookings.",
+      "Ensure all functions match those described in the requirements (each with appropriate arguments and error handling).",
+      "Create src/utils/constants.js for reusable city lists, ratings, and API URLs.",
+      "Set base API URL as http://localhost:8080 for backend integration.",
+      "Add robust error handling and response parsing in ApiService."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/utils/ApiService.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/utils/constants.js"
+    ],
+    "files_to_edit": [],
+    "description": "Separates backend communication logic and constants from components, supporting error handling and DRY frontend code. Supports testing by providing a single location to mock API calls."
+  },
+  {
+    "step": "Create Core React Components and Integrate Routing",
+    "sub_steps": [
+      "Create the following components in src/components: Header.js, FlightSearch.js, FlightList.js, HotelSearch.js, HotelList.js, BookingList.js.",
+      "Implement App.js with React Router routes: / (home), /flights, /hotels, /bookings.",
+      "Header should include navigation and app title as described.",
+      "Each search and list component should be focused as specified in requirements.",
+      "Ensure state management (useState/useEffect) for form states, search results, booking actions, and error displays.",
+      "Thread props appropriately between search and list components."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/Header.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/FlightSearch.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/FlightList.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/HotelSearch.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/HotelList.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/BookingList.js"
+    ],
+    "files_to_edit": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/App.js"
+    ],
+    "description": "Implements all visual and functional UI components, ensuring app navigation and page layouts match requirements. Each component will be tested by the provided Jest tests."
+  },
+  {
+    "step": "Styling: Implement CSS Theme and Component Styles",
+    "sub_steps": [
+      "Edit App.css and index.css to provide a consistent theme using CSS variables (e.g. --accent, --border-radius, etc).",
+      "Style containers, forms, buttons, error messages, and empty states as described in the design requirements (planning prompt).",
+      "Add mobile responsiveness and modern layout as specified.",
+      "Apply .btn-primary, .btn-secondary, .error, and other utility classes as required.",
+      "Ensure each component references the global/app CSS and adds any local classes needed."
+    ],
+    "files_to_add": [],
+    "files_to_edit": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/App.css",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/index.css"
+    ],
+    "description": "Creates unified, accessible, and attractive styling for the app. Fulfills all specific visual and form state requirements."
+  },
+  {
+    "step": "Implement ALL React/Jest Test Cases",
+    "sub_steps": [
+      "Create/modify the following test files in src/components, each validating exactly the test cases provided:",
+      "- FlightSearch.test.js: test form UI, valid/invalid submission, error messages, API interaction.",
+      "- FlightList.test.js: display, buttons, booking action, disabled state for no seats, empty message, API call verification.",
+      "- HotelSearch.test.js: test form fields, valid/invalid submission, error display, API call verification.",
+      "- BookingList.test.js: grouped display, status, cancel button, API integration, status update, and empty state.",
+      "For each, set up required mocks (API calls via ApiService).",
+      "Use data-testid for reliable selector matching.",
+      "Ensure NO manual cleanup calls in tests.",
+      "Use only assertions and coverage as described in test case JSON.",
+      "Reference corresponding component files for correct prop names and structure."
+    ],
+    "files_to_add": [
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/FlightSearch.test.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/FlightList.test.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/HotelSearch.test.js",
+      "/home/coder/project/workspace/question_generation_service/solutions/0bc56dc2-5e4e-40c4-8aa0-4bb066a2ceb3/reactapp/src/components/BookingList.test.js"
+    ],
+    "files_to_edit": [],
+    "description": "Guarantees correctness of all React functionality with complete test coverage, side-by-side to component logic. Required for CI."
+  },
+  {
+    "step": "Compile and Test Frontend (React/Jest)",
+    "sub_steps": [
+      "Run 'npm install' in /reactapp to install dependencies.",
+      "Run 'npm run build' to check that the project compiles and builds successfully.",
+      "Run 'npx eslint src/ --fix' to lint and auto-fix code issues.",
+      "Run 'npm run test:ci' to execute all Jest/RTL tests without blocking.",
+      "Fix any errors found during this sequence before concluding."
+    ],
+    "files_to_add": [],
+    "files_to_edit": [],
+    "description": "Validates code and test compliance for the React frontend. Ensures no regressions or build failures before deployment."
+  }
+]
