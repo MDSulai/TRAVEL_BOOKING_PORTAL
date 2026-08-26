@@ -14,7 +14,7 @@ function HotelList({
         <div>
             <h2>Available Hotels</h2>
 
-            {error && <p>[Error - You need to specify the message]</p>}
+            {error && <p>{error}</p>}
 
             {hotels.map((hotel) => {
                 const soldOut = hotel.availableRooms <= 0;

@@ -11,7 +11,7 @@ function FlightList({ flights = [], onBook, bookingId, error }) {
 
             {error && (
                 <p data-testid="book-error">
-                    [Error - You need to specify the message]
+                    {error}
                 </p>
             )}
 

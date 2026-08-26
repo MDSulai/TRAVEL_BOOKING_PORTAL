@@ -54,7 +54,7 @@ function FlightSearch({ onSearch, loading }) {
           value={origin}
           onChange={(e) => setOrigin(e.target.value)}
         >
-          <option value="">Select origin</option>
+          <option value="">-- Select --</option>
           <option value="Delhi">Delhi</option>
           <option value="Mumbai">Mumbai</option>
           <option value="Bangalore">Bangalore</option>
@@ -73,7 +73,7 @@ function FlightSearch({ onSearch, loading }) {
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
         >
-          <option value="">Select destination</option>
+          <option value="">-- Select --</option>
           <option value="Delhi">Delhi</option>
           <option value="Mumbai">Mumbai</option>
           <option value="Bangalore">Bangalore</option>
