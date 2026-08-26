@@ -1,4 +1,5 @@
 import React from "react";
+import '@testing-library/jest-dom';
 
 function FlightList({ flights = [], onBook, bookingId, error }) {
     if (!flights.length) {

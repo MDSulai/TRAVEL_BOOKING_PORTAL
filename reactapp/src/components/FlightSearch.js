@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '@testing-library/jest-dom';
 
 function FlightSearch({ onSearch, loading }) {
   const [origin, setOrigin] = useState('');

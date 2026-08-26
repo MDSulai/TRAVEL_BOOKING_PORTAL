@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as ApiService from "../utils/ApiService";
+import '@testing-library/jest-dom';
 
 function BookingList() {
     const [bookings, setBookings] = useState([]);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import BookingList from '../components/BookingList';
+import BookingList from './BookingList';
 
 jest.mock('../utils/ApiService', () => ({
   getUserBookings: jest.fn(),
@@ -40,7 +40,6 @@ describe('BookingList', () => {
     });
     expect(screen.getByText(/Hotel #4/)).toBeInTheDocument();
     expect(screen.getByText(/Flight #3/)).toBeInTheDocument();
-    // There are two bookings, so there will be two "CONFIRMED". Just check for at least one exists now using getAllByText.
     expect(screen.getAllByText(/CONFIRMED/).length).toBeGreaterThanOrEqual(1);
   });
   it('shows empty if none', async () => {

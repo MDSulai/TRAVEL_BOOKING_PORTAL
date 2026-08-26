@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '@testing-library/jest-dom';
 
 function HotelSearch({ onSearch, loading }) {
     const [location, setLocation] = useState("");

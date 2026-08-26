@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import HotelSearch from '../components/HotelSearch';
+import HotelSearch from './HotelSearch';
 
 describe('HotelSearch', () => {
   const defaultProps = { onSearch: jest.fn(), loading: false };

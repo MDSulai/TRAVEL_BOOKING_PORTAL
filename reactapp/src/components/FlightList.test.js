@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FlightList from '../components/FlightList';
+import FlightList from './FlightList';
 
 describe('FlightList', () => {
   const flights = [

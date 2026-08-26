@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FlightSearch from '../components/FlightSearch';
+import FlightSearch from './FlightSearch';
 
 describe('FlightSearch', () => {
   const defaultProps = { onSearch: jest.fn(), loading: false };
